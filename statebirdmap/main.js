@@ -54,6 +54,7 @@ const stateBirds = {
 
 let wordStates = document.querySelectorAll(".list-of-states li");
 let svgStates = document.querySelectorAll("#states > *");
+let showAllStates = document.querySelector('.showall');
 
 function removeAllOn() {
   wordStates.forEach(function(el) {
@@ -61,6 +62,15 @@ function removeAllOn() {
   });
   svgStates.forEach(function(el) {
     el.classList.remove("on");
+  });
+}
+
+function addAllOn() {
+  wordStates.forEach(function(el) {
+    el.classList.add("on");
+  });
+  svgStates.forEach(function(el) {
+    el.classList.add("on");
   });
 }
 
@@ -111,6 +121,18 @@ svgStates.forEach(function(el) {
     addOnFromState(el);
   });
 });
+
+showAllStates.addEventListener("mouseenter", function() {
+    addAllOn();
+  });
+  showAllStates.addEventListener("mouseleave", function() {
+     removeAllOn();
+  });
+  
+  showAllStates.addEventListener("touchstart", function() {
+    removeAllOn();
+    addAllOn(el);
+  });
 
 const birdImages = {
     AL: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Northern_Flicker.jpg',

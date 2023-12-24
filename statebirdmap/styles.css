@@ -6,6 +6,9 @@ html {
 body {
   padding: 5px 10px;
   background-color: #222326;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .headline {
@@ -33,23 +36,26 @@ svg {
 }
 
 .list-of-states {
-  padding: 0;
-  columns: 100px auto;
+  padding: 0px;
+  columns: 100px 10;
   column-gap: 8px;
   list-style: none;
   color: #F4F5F8;
+  text-align: center; /* Add this line to center the list items */
 }
 .list-of-states li {
   padding: 2px 4px;
   display: inline-block;
   width: 100%;
+  display: block; /* Change to block to take full width */
+  text-align: left; /* Align text to the left */
 }
 .list-of-states li.on {
   background: #5E6AD2;
   color: #F4F5F8;
   font-weight: bold;
 }
-
+/* 
 .expand:hover {
     transform: scale(1.05);
     z-index: 3;
@@ -58,5 +64,10 @@ svg {
   .expand {
     transition: all 1s;
     transform-origin: 50% 50%;
-  }
+  } */
   
+  .showall {
+    color: #F4F5F8;
+    display:flex;
+    justify-content: center;
+  }
