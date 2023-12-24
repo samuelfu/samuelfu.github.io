@@ -11,9 +11,6 @@ svg {
   display: block;
   width: 100%;
 }
-/* #states *.on {
-  fill: url(#imagePattern);
-} */
 
 .list-of-states {
   margin: 0;
