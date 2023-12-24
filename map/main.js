@@ -90,7 +90,7 @@ const birdImages = {
     OH: 'https://upload.wikimedia.org/wikipedia/commons/d/da/Cardinal.jpg',
     OK: 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Scissortailedfly700.JPG',
     OR: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/WesternMeadowlark23.jpg',
-    PA: 'URL_FOR_PENNSYLVANIA_STATE_BIRD',
+    PA: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Ruffed_Grouse_%2818645551408%29.jpg',
     RI: 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Rhode_Island_Red.jpg',
     SC: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Carolina_Wren_2.jpg',
     SD: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Phasianus_colchicus_2_tom_%28Lukasz_Lukasik%29.jpg',
@@ -128,20 +128,27 @@ for (const state in birdImages) {
 // Create <defs> element
 var defs = document.createElementNS(svgNS, 'defs');
 
+// Get the SVG element
+var svg = document.getElementById(`${state}`); // Replace 'yourSVGId' with your SVG element's ID
+
+// Get the bounding box of the SVG
+var bbox = svg.getBBox();
+console.log(bbox)
+
 // Create <pattern> element
 var pattern = document.createElementNS(svgNS, 'pattern');
 pattern.setAttribute('id', `image${state}`);
 pattern.setAttribute('patternUnits', 'userSpaceOnUse');
-pattern.setAttribute('width', '75');
-pattern.setAttribute('height', '75');
+pattern.setAttribute('width', String(bbox.width * 0.5));
+pattern.setAttribute('height', String(bbox.height * 0.5));
 
 // Create <image> element
 var image = document.createElementNS(svgNS, 'image');
 image.setAttribute('href', birdImages[state]);
 image.setAttribute('x', '0');
 image.setAttribute('y', '0');
-image.setAttribute('width', '75');
-image.setAttribute('height', '75');
+image.setAttribute('width', String(bbox.width * 0.5));
+image.setAttribute('height', String(bbox.height * 0.5));
 image.setAttribute('preserveAspectRatio', 'xMidYMid slice');
 
 // Append <image> to <pattern>
