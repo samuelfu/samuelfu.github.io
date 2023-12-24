@@ -12,7 +12,7 @@ svg {
   width: 100%;
 }
 #states *.on {
-  fill: red;
+  fill: url(#imagePattern);
 }
 
 .list-of-states {
