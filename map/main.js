@@ -69,6 +69,9 @@ function addOnFromList(el) {
   var svgState = document.querySelector("#" + stateCode);
   el.classList.add("on");
   svgState.classList.add("on");
+  let path = document.querySelector(`#${stateCode}`);
+  let bird = document.querySelector(`.bird`);
+  bird.textContent = stateBirds[path.id];
 }
 
 function addOnFromState(el) {
