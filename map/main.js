@@ -1,3 +1,57 @@
+const stateBirds = {
+    AL: "Yellowhammer",
+    AK: "Willow Ptarmigan",
+    AZ: "Cactus Wren",
+    AR: "Northern Mockingbird",
+    CA: "California Quail",
+    CO: "Lark Bunting",
+    CT: "American Robin",
+    DE: "Delaware Blue Hen",
+    FL: "Northern Mockingbird",
+    GA: "Brown Thrasher",
+    HI: "Hawaiian Goose (Nene)",
+    ID: "Mountain Bluebird",
+    IL: "Northern Cardinal",
+    IN: "Northern Cardinal",
+    IA: "Eastern Goldfinch",
+    KS: "Western Meadowlark",
+    KY: "Northern Cardinal",
+    LA: "Brown Pelican",
+    ME: "Chickadee",
+    MD: "Baltimore Oriole",
+    MA: "Black-capped Chickadee",
+    MI: "American Robin",
+    MN: "Common Loon",
+    MS: "Northern Mockingbird",
+    MO: "Eastern Bluebird",
+    MT: "Western Meadowlark",
+    NE: "Western Meadowlark",
+    NV: "Mountain Bluebird",
+    NH: "Purple Finch",
+    NJ: "Eastern Goldfinch",
+    NM: "Greater Roadrunner",
+    NY: "Eastern Bluebird",
+    NC: "Northern Cardinal",
+    ND: "Western Meadowlark",
+    OH: "Northern Cardinal",
+    OK: "Scissor-tailed Flycatcher",
+    OR: "Western Meadowlark",
+    PA: "Ruffed Grouse",
+    RI: "Rhode Island Red",
+    SC: "Carolina Wren",
+    SD: "Ring-necked Pheasant",
+    TN: "Northern Mockingbird",
+    TX: "Northern Mockingbird",
+    UT: "California Gull",
+    VT: "Hermit Thrush",
+    VA: "Northern Cardinal",
+    WA: "Willow Goldfinch",
+    WV: "Northern Cardinal",
+    WI: "American Robin",
+    WY: "Western Meadowlark"
+  };
+  
+
 let wordStates = document.querySelectorAll(".list-of-states li");
 let svgStates = document.querySelectorAll("#states > *");
 
@@ -22,6 +76,9 @@ function addOnFromState(el) {
   var wordState = document.querySelector("[data-state='" + stateId + "']");
   el.classList.add("on");
   wordState.classList.add("on");
+  let path = document.querySelector(`#${stateId}`);
+  let bird = document.querySelector(`.bird`);
+  bird.textContent = stateBirds[path.id];
 }
 
 wordStates.forEach(function(el) {
@@ -159,3 +216,13 @@ defs.appendChild(pattern);
 
 g.appendChild(defs);
 }
+
+// Loop through each path in the SVG
+document.querySelectorAll('path').forEach(path => {
+    const stateCode = path.getAttribute('id');
+    if (stateBirds[stateCode]) {
+      const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+      title.textContent = stateBirds[stateCode]; // Set the state bird name as text content
+      path.appendChild(title); // Append the <title> to the path
+    }
+  });
