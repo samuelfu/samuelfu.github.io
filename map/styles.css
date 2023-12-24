@@ -5,6 +5,7 @@ html {
 }
 body {
   padding: 5px 10px;
+  background-color: #222326;
 }
 
 svg {
@@ -18,6 +19,7 @@ svg {
   columns: 100px auto;
   column-gap: 8px;
   list-style: none;
+  color: #F4F5F8;
 }
 .list-of-states li {
   padding: 2px 4px;
@@ -25,7 +27,7 @@ svg {
   width: 100%;
 }
 .list-of-states li.on {
-  background: red;
-  color: white;
+  background: #5E6AD2;
+  color: #F4F5F8;
   font-weight: bold;
 }
