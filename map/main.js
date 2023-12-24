@@ -52,3 +52,14 @@ svgStates.forEach(function(el) {
   });
 });
 
+// Create a style element
+var style = document.createElement('style');
+
+// Define the CSS rule
+var css = '#states *.on { fill: url(#imagePattern); }';
+
+// Append the CSS rule to the style element
+style.appendChild(document.createTextNode(css));
+
+// Append the style element to the document head
+document.head.appendChild(style);
