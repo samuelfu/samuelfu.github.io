@@ -16,3 +16,7 @@ li {
 .correct {
     background-color: green;
 }
+
+.card {
+    font-size: 20px;
+}
