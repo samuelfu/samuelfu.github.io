@@ -1,0 +1,18 @@
+li {
+    list-style: none;
+}
+
+
+.answer {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+}
+.answer:hover {
+    filter: drop-shadow(0 0 2em #4e4f5daa);
+}
+
+.correct {
+    background-color: green;
+}
