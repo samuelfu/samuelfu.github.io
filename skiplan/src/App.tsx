@@ -5,7 +5,7 @@ import {useState, useEffect, SetStateAction, Dispatch} from 'react';
 
 const fetchMessages = async () => {
   try {
-    const response = await fetch('http://localhost:3000/getallmessages');
+    const response = await fetch('https://test-vv4n.onrender.com/getallmessages');
     if (!response.ok) {
       throw new Error('Failed to fetch messages');
     }
@@ -18,8 +18,8 @@ const fetchMessages = async () => {
 
 const clearMessage = async (setMessage: Dispatch<SetStateAction<MessageObject>>) => {
   try {
-    // const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
-    const response = await fetch('http://localhost:3000/clearmessage', {
+    const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
+    // const response = await fetch('http://localhost:3000/clearmessage', {
 
     method: 'GET' // You might need to adjust the method based on your server endpoint
       // You can add headers, body, etc., depending on your API requirements
@@ -69,7 +69,7 @@ function App() {
   const sendMessage = async (setMessage: Dispatch<SetStateAction<MessageObject>>) => {
     try {
       // const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
-      const response = await fetch('http://localhost:3000/message?name=hi', {
+      const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
  
       method: 'GET' // You might need to adjust the method based on your server endpoint
         // You can add headers, body, etc., depending on your API requirements
