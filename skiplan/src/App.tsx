@@ -18,8 +18,8 @@ const fetchMessages = async () => {
 
 const clearMessage = async (setMessage) => {
   try {
-    // const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
-    const response = await fetch('http://localhost:3000/clearmessage', {
+    const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
+    // const response = await fetch('http://localhost:3000/clearmessage', {
 
     method: 'GET' // You might need to adjust the method based on your server endpoint
       // You can add headers, body, etc., depending on your API requirements
