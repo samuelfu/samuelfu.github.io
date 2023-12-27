@@ -1,7 +1,7 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import {useState, useEffect} from 'react';
+import {useState, useEffect, SetStateAction, Dispatch} from 'react';
 
 const fetchMessages = async () => {
   try {
@@ -12,14 +12,14 @@ const fetchMessages = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching messages:', error.message);
+    console.error('Error fetching messages:', (error as Error).message);
   }
 }
 
-const clearMessage = async (setMessage) => {
+const clearMessage = async (setMessage: Dispatch<SetStateAction<MessageObject>>) => {
   try {
-    const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
-    // const response = await fetch('http://localhost:3000/clearmessage', {
+    // const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
+    const response = await fetch('http://localhost:3000/clearmessage', {
 
     method: 'GET' // You might need to adjust the method based on your server endpoint
       // You can add headers, body, etc., depending on your API requirements
@@ -33,17 +33,16 @@ const clearMessage = async (setMessage) => {
     console.log('Message cleared successfully!');
     setMessage({messages: []})
   } catch (error) {
-    console.error('Error clearing message:', error.message);
+    console.error('Error clearing message:', (error as Error).message);
   }
 }
 
-interface MessageData {
+interface MessageObject {
   messages: string[];
 }
 
-
-function Message({messages}: MessageData) {
-  const messageList: string[] = messages['messages'] || [];
+function Message({ messageObject }: { messageObject: MessageObject }) {
+  const messageList: string[] = messageObject.messages || [];
   console.log(messageList);
   return (
     <ul>
@@ -55,7 +54,7 @@ function Message({messages}: MessageData) {
 }
 
 function App() {
-  const [messages, setMessage] = useState<MessageData>({ messages: [] }); // Correct state initialization
+  const [messageObject, setMessage] = useState<MessageObject>({ "messages": [] }); // Correct state initialization
   useEffect(() => {
     fetchMessages()
       .then((data) => {
@@ -67,7 +66,7 @@ function App() {
   }, []);
   
   
-  const sendMessage = async (setMessage) => {
+  const sendMessage = async (setMessage: Dispatch<SetStateAction<MessageObject>>) => {
     try {
       // const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
       const response = await fetch('http://localhost:3000/message?name=hi', {
@@ -85,7 +84,7 @@ function App() {
       const resp = await fetchMessages();
       setMessage(resp);
     } catch (error) {
-      console.error('Error sending message:', error.message);
+      console.error('Error sending message:', (error as Error).message);
     }
   };
 
@@ -108,7 +107,7 @@ function App() {
           Clear messages
         </button>
       </div>
-      <Message messages={messages}/>
+      <Message messageObject={messageObject}/>
     </>
   )
 }
