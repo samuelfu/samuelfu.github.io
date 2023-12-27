@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require('fs');
 const app = express();
 const port = 3000;
+const cors = require('cors');
 
 const myLogger = function(req, res, next) {
   console.log("Request IP: " + req.ip);
@@ -12,6 +13,7 @@ const myLogger = function(req, res, next) {
 }
 
 app.use(myLogger)
+app.use(cors()); // Enable CORS for all routes
 
 app.get("/", function (req, res) {
   res.send("Hello World!");
@@ -37,6 +39,34 @@ app.get("/message", (req, res) => {
     res.send(`Name '${name}' saved successfully`);
   });
 });
+
+// Endpoint to fetch all content from names.txt
+app.get("/getallmessages", (req, res) => {
+  // Read the content of 'names.txt'
+  fs.readFile('names.txt', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error fetching messages');
+    }
+    const messages = data.split('\n').filter(Boolean); // Split by lines and filter out empty lines
+    res.json({ messages });
+  });
+});
+
+// Endpoint to clear the content of 'names.txt'
+app.get("/clearmessage", (req, res) => {
+  // Clear the content of 'names.txt'
+  fs.writeFile('names.txt', '', (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error clearing messages');
+    }
+    res.send('File content cleared successfully');
+  });
+});
+
+
+
 app.listen(port, function () {
   console.log(`Example app listening on port ${port}!`);
 });
