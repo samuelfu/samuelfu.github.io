@@ -4,7 +4,23 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const sendMessage = async () => {
+    try {
+      const response = await fetch('https://test-vv4n.onrender.com/message?name=hi', {
+        method: 'GET' // You might need to adjust the method based on your server endpoint
+        // You can add headers, body, etc., depending on your API requirements
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      // Handle success if needed
+      console.log('Message sent successfully!');
+    } catch (error) {
+      console.error('Error sending message:', error.message);
+    }
+  };
 
   return (
     <>
@@ -18,16 +34,10 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => sendMessage()}>
+          Send "hi" to the endpoint
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
