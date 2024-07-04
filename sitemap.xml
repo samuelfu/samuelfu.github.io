@@ -7,6 +7,12 @@
       <priority>1.0</priority>
    </url>
    <url>
+      <loc>http://www.samuelfu.com/routecanvas/index.html</loc>
+      <lastmod>2024-07-04</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.9</priority>
+   </url>
+   <url>
       <loc>http://www.samuelfu.com/micrograd/index.html</loc>
       <lastmod>2024-06-22</lastmod>
       <changefreq>monthly</changefreq>
