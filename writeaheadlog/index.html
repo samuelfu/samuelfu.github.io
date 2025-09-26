@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Resilient Data Platform with Write-Ahead Log at Netflix</title>
+    <style type="text/css">
+        body{margin:40px
+            auto;max-width:900px;line-height:1.6;font-size:18px;color:#444;padding:0
+            10px}h1,h2,h3{line-height:1.2}        .image-container {
+            display: flex;
+            flex-direction: row;
+            height: 30vh;
+            gap: 4vh;
+            justify-content: center;
+        }
+        code {
+        font-size:12px;
+        background-color: #333; /* Dark grey background */
+        color: #fff; /* White text */
+        padding: 10px;
+        display: block;
+        overflow-x: auto; /* Adds horizontal scrolling if necessary */
+        }
+    </style>
+</head>
+<body>
+    <h1>Building a Resilient Data Platform with Write-Ahead Log at Netflix</h1>
+    <p>Published on Netflix Tech Blog</p>
+    <p>Samuel Fu, Netflix Inc</p>
+
+    <p>Netflix operates at a massive scale, serving hundreds of millions of users with diverse content and features. Behind the scenes, ensuring data consistency, reliability, and efficient operations across various services presents a continuous challenge. At the heart of many critical functions lies the concept of a Write-Ahead Log (WAL) abstraction. At Netflix scale, every challenge gets amplified. Some of the key challenges we encountered include:</p>
+
+    <ul>
+        <li>Accidental data loss and data corruption in databases</li>
+        <li>System entropy across different datastores (e.g., writing to Cassandra and Elasticsearch)</li>
+        <li>Handling updates to multiple partitions (e.g., building secondary indices on top of a NoSQL database)</li>
+        <li>Data replication (in-region and across regions)</li>
+        <li>Reliable retry mechanisms for real time data pipeline at scale</li>
+        <li>Bulk deletes to database causing OOM on the Key-Value nodes</li>
+    </ul>
+
+    <p>All the above challenges either resulted in production incidents or outages, consumed significant engineering resources, or led to bespoke solutions and technical debt. During one particular incident, a developer issued an ALTER TABLE command that led to data corruption. Fortunately, the data was fronted by a cache, so the ability to extend cache TTL quickly together with the app writing the mutations to Kafka allowed us to recover. Absent the resilience features on the application, there would have been permanent data loss. As the data platform team, we needed to provide resilience and guarantees to protect not just this application, but all the critical applications we have at Netflix.</p>
+
+    <p>Regarding the retry mechanisms for real time data pipelines, Netflix operates at a massive scale where failures (network errors, downstream service outages, etc.) are inevitable. We needed a reliable and scalable way to retry failed messages, without sacrificing throughput.</p>
+
+    <p>With these problems in mind, we decided to build a system that would solve all the aforementioned issues and continue to serve the future needs of Netflix in the online data platform space. Our Write-Ahead Log (WAL) is a distributed system that captures data changes, provides strong durability guarantees, and reliably delivers these changes to downstream consumers. This blog post dives into how Netflix is building a generic WAL solution to address common data challenges, enhance developer efficiency, and power high-leverage capabilities like secondary indices, enable cross-region replication for non-replicated storage engines, and support widely used patterns like delayed queues.</p>
+
+    <p><a href="https://netflixtechblog.com/building-a-resilient-data-platform-with-write-ahead-log-at-netflix-127b6712359a">Read the full article on Netflix Tech Blog →</a></p>
+
+    <div class="image-container">
+        <img src="architecture.webp" alt="Write-Ahead Log Architecture at Netflix" style="max-width: 100%; height: auto;">
+    </div>
+</body>
+</html>
